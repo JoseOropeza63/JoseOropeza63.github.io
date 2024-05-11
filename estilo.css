@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Rajdhani';
+    background: url(IMAGENES/foto.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+}
+#pantalla-inicial{
+    display: block;
+    max-width: 700px;
+    margin: 22px auto;
+    text-align: center;
+    background: rgba(255, 255, 255, .7);
+   
+    padding: 30px;
+    border: 3px solid rgb(243, 5, 5);
+    box-shadow: 0 0 10px 5px rgb(255, 0, 0); /* Sombra para dar efecto de brillo */
+    border-radius: 40px;
+}
+#pantalla-inicial{
+    font-family: 'Rammetto One';
+    font-size: 20px;
+    color: #5972d9;
+    
+}
+button{
+    background: #be4242;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 0 20px;
+    border-radius: 30px;
+    border-bottom: 4px solid #ff0800;
+}
+button:hover{
+     border-bottom: 4px solid transparent;
+     background-color: #fa0000;
+}
+/*seccion pantalla del juego*/
+#pantalla-juego{
+    display: none;
+}
+/* esta clase se agregara dinamicamente*/
+.pregunta-actual{
+      background-color: #000;
+      color: #fff;
+}
+/* esta clase agregara cuando responde bien*/
+.bien-respondida{
+    background-color: #3edbbb;
+    color: #fff;
+}
+/* esta clase agregara cuando responde mal*/
+.mal-respondida{
+    background-color: #fb797b;
+    color: #fff;
+    
+}
+.contenedor-pregunta{
+    background-color: rgba(255, 255, 255, .7);
+    text-align: center;
+    max-width: 700px;
+    height: 150px;
+    margin: auto;
+    border: 2px solid #000;
+    border-radius: 20px;
+    padding: 0 20px;
+    
+}
+.contenedor-pregunta #pregunta{
+    
+    margin: 0;
+    font-weight: normal;
+}
+.contenedor-pregunta input{
+    display: inline-block;
+    margin: 10px 0;
+    font-size: 18px;
+    padding: 10px;
+    text-align: center;
+    width: 60%;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    border: 2px solid #ccc;
+}
+
+#pantalla-preg{
+    display: none;
+}
+
+
+/*Medio*/
+.container{
+   
+    position: relative;
+    width: 255px;
+    height: 255px;
+    margin: 50px auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

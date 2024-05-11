@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>TEST DE INTELIGENCIA</title>
+   
+    <style>
+
+       /*estilo de cuadro*/
+       .containercuadro {
+            perspective: 1000px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .card {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 20px;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .card:hover {
+            transform: rotateY(180deg);
+        }
+
+        .front,
+        .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .front {
+            background-color: #d5eb0ece;
+            padding: 30px;
+    border: 3px solid rgb(4, 0, 255);
+    box-shadow: 0 0 10px 5px rgb(0, 0, 0); /* Sombra para dar efecto de brillo */
+    border-radius: 40px;
+            color: #0c0c0c;
+        }
+
+        .back {
+            background-color: #333;
+            color: #f0f0f0;
+            transform: rotateY(180deg);
+        }
+
+        .brilliant-border {
+            border: 2px solid transparent;
+            border-radius: 10px;
+            background-clip: padding-box;
+            transition: border-color 0.5s;
+        }
+
+        .card:hover .brilliant-border {
+            border-color: #f39c12;
+        }
+
+        /*estilo de cuadro*/
+       
+        .question {
+            display: none;
+            margin-bottom: 10px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .button-container label {
+            margin: 0 10px;
+            padding: 5px 10px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-container input[type="radio"] {
+            display: none;
+        }
+        .button-container input[type="radio"]:checked + label {
+            background-color: lightblue;
+        }
+        .center-flex {
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            height: 50vh; /* Ocupa la altura total de la ventana */
+        }
+            
+
+        
+        .shadow-input {
+            border: 2px solid rgb(100, 86, 86); /* Borde gris */
+            border-radius: 5px; /* Bordes redondeados */
+            padding: 8px; /* Espacio interno */
+            box-shadow: 0px 4px 8px 0px rgb(43, 38, 38); /* Sombra para dar efecto tridimensional */
+            transition: box-shadow 0.3s; /* Transición para suavizar el cambio de sombra */
+        }
+
+        .shadow-input:hover {
+            box-shadow: 0px 8px 16px 0px rgb(38, 0, 252); /* Sombra más intensa al pasar el ratón */
+        }
+        .text-container {
+            text-align: center; /* Alineación del texto en el centro */
+            font-size: 40px;
+        }
+
+        .colorful-shadow {
+             text-shadow: 2px 2px 4px #ff0000, -2px -2px 4px #ff2600, 2px -2px 4px #0000ff, -2px 2px 4px #ff0000;
+            
+        }
+
+        .texto-en-cuadro {
+            background-color: #ff0000; /* Color de fondo */
+            border: 1px solid #000000; /* Borde */
+            padding: 10px; /* Espaciado interno */
+            border-radius: 5px; /* Bordes redondeados */
+            width: 300px; /* Ancho del cuadro */
+            font-family: Arial, sans-serif; /* Fuente del texto */
+            color: #333; /* Color del texto */
+            font-size: 16px; /* Tamaño de fuente */
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+            margin: 0 auto; /* Centrar horizontalmente */
+        }
+    </style>
+    
+   
+    </div>
+   <div class="text-container">
+    <h1 class="colorful-shadow">UNIVERSIDAD NACIONAL </h1>
+    <h2 class="colorful-shadow">"SIGLO XX"</h2>
+    
+</div>
+</head>
+<body>
+     
+    
+    <div class="center-flex">
+       
+        <img src="IMAGENES/uns.png" width="250px" height="250px">
+    </div>
+
+    <section id="pantalla-inicial">
+        
+
+        
+        <form id="testForm">
+
+            <div class="question">
+                <h1>TEST DE INTELIGENCIA MÚLTIPLE</h1>
+                <p style="color: black;">Este tipo de test tiene como objetivo identificar y reconocer diferentes habilidades y talentos en las personas, 
+                    destacando que cada individuo puede ser inteligente en más de un área.</p>
+            </div>
+            
+            <div id="nombreApellido" class="question" style="display: block;">
+                <h2>Nombre y Apellido</h2>
+                <input class="shadow-input" type="text" id="nombreApellidoInput" placeholder="Ingrese su nombre y apellido" onkeydown="saltarConEnter(event)">
+            </div>
+
+            <div class="question">
+                <h1>INSTRUCCIONES</h1>
+                <p style="color: black;">Lee cada una de las afirmaciones. Si expresan características fuertes en su persona 
+                    y te parece que la afirmación es verdad entonces coloca una V 
+                 y si no lo es, coloca una F tabien puedes saltar la pregunta poniendo SIGUIENTE</p>
+            </div>
+        
+            <!-- Preguntas del test -->
+            <div class="question" style="display: block;">
+                <p>1. Prefiero hacer un mapa que explicarle a alguien cómo llegar.</p>
+                <img src="IMAGENES/1.jpg" width="250px" height="250px" >
+                
+                <div class="button-container">
+        
+                    <input type="radio" name="C1" id="C1V" value="1"> <label for="C1V">V</label>
+                    <input type="radio" name="C1" id="C1F" value="0"> <label for="C1F">F</label>
+
+                </div>
+            </div>
+
+            <!-- Aquí puedes repetir el patrón para todas las preguntas -->
+            <!-- Repite para cada pregunta -->
+            <div class="question">
+                <p>2. Si estoy contento(a) o enojado(a), generalmente sé exactamente por qué.</p>
+                <img src="IMAGENES/2.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="F2" id="F2V" value="1"> <label for="F2V">V</label>
+                    <input type="radio" name="F2" id="F2F" value="0"> <label for="F2F">F</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>3. Sé tocar (o antes sabía tocar) un instrumento musical.</p>
+                <img src="IMAGENES/3.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="E3" id="E3V" value="1"> <label for="E3V">V</label>
+                    <input type="radio" name="E3" id="E3F" value="0"> <label for="E3F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>4. Asocio la música con mis estados de ánimo.</p>
+                <img src="IMAGENES/4.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="E4" id="E4V" value="1"> <label for="E4V">V</label>
+                    <input type="radio" name="E4" id="E4F" value="0"> <label for="E4F">F</label>
+                </div>
+            </div>
+            <!-- Debes incluir todas las preguntas -->
+            <!-- Preguntas para inteligencia lógica-matemática -->
+            <div class="question">
+                <p>5. Puedo sumar o multiplicar mentalmente con mucha rapidez.</p>
+                <img src="IMAGENES/5.png" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="B5" id="B5V" value="1"> <label for="B5V">V</label>
+                    <input type="radio" name="B5" id="B5F" value="0"> <label for="B5F">F</label>
+                </div>
+            </div>
+            <!-- Continúa con las preguntas restantes -->
+            <div class="question">
+                <p>6. Puedo ayudar a un amigo a manejar sus sentimientos porque yo lo pude  hacer antes en relación a sentimientos parecidos.</p>
+                <img src="IMAGENES/5.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="F6" id="F6V" value="1"> <label for="F6V">V</label>
+                    <input type="radio" name="F6" id="F6F" value="0"> <label for="F6F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>7. Me gusta trabajar con calculadoras y computadores.</p>
+                <img src="IMAGENES/7.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="B7" id="B7V" value="1"> <label for="B7V">V</label>
+                    <input type="radio" name="B7" id="B7F" value="0"> <label for="B7F">F</label>
+                </div>
+            </div>
+            <!-- Preguntas para inteligencia kinestésica-corporal -->
+            <div class="question">
+                <p>8. Aprendo rápido a bailar un ritmo nuevo.</p>
+                <img src="IMAGENES/6.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="D8" id="D8V" value="1"> <label for="D8V">V</label>
+                    <input type="radio" name="D8" id="D8F" value="0"> <label for="D8F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>9. No me es difícil decir lo que pienso en el curso de una discusión o debate.</p>
+                <img src="IMAGENES/6.png" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="A9" id="A9V" value="1"> <label for="A9V">V</label>
+                    <input type="radio" name="A9" id="A9F" value="0"> <label for="A9F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>10. Disfruto de una buena charla, discurso o sermón.</p>
+                <img src="IMAGENES/7.png" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="A10" id="A10V" value="1"> <label for="A10V">V</label>
+                    <input type="radio" name="A10" id="A10F" value="0"> <label for="A10F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>11. Siempre distingo el norte del sur, esté donde esté.</p>
+                <img src="IMAGENES/8.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="C11" id="C11V" value="1"> <label for="C11V">V</label>
+                    <input type="radio" name="C11" id="C11F" value="0"> <label for="C11F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>12. Me gusta reunir grupos de personas en una fiesta o en un evento especial.</p>
+                <img src="IMAGENES/9.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="G12" id="G12V" value="1"> <label for="G12V">V</label>
+                    <input type="radio" name="G12" id="G12F" value="0"> <label for="G12F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>13. La vida me parece vacía sin música.</p>
+                <img src="IMAGENES/8.png" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="E13" id="E13V" value="1"> <label for="E13V">V</label>
+                    <input type="radio" name="E13" id="E13F" value="0"> <label for="E13F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>14. Siempre entiendo los gráficos que vienen en las instrucciones de equipos o instrumentos.</p>
+                <img src="IMAGENES/9.png" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="C14" id="C14V" value="1"> <label for="C14V">V</label>
+                    <input type="radio" name="C14" id="C14F" value="0"> <label for="C14F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>15. Me gusta hacer rompecabezas y entretenerme con juegos electrónicos.</p>
+                <img src="IMAGENES/10.png" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="B15" id="B15V" value="1"> <label for="B15V">V</label>
+                    <input type="radio" name="B15" id="B15F" value="0"> <label for="B15F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>16. Me fue fácil aprender a andar en bicicleta. ( o patines).</p>
+                <img src="IMAGENES/10.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="D16" id="D16V" value="1"> <label for="D16V">V</label>
+                    <input type="radio" name="D16" id="D16F" value="0"> <label for="D16F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>17. Me enojo cuando oigo una discusión o una afirmación que parece ilógica.</p>
+                <img src="IMAGENES/11.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="A17" id="A17V" value="1"> <label for="A17V">V</label>
+                    <input type="radio" name="A17" id="A17F" value="0"> <label for="A17F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>18. Soy capaz de convencer a otros que sigan mis planes.</p>
+                <img src="IMAGENES/12.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="G18" id="G18V" value="1"> <label for="G18V">V</label>
+                    <input type="radio" name="G18" id="G18F" value="0"> <label for="G18F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>19. Tengo buen sentido de equilibrio y coordinación.</p>
+                <img src="IMAGENES/13.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="D19" id="D19V" value="1"> <label for="D19V">V</label>
+                    <input type="radio" name="D19" id="D19F" value="0"> <label for="D19F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>20. Con frecuencia veo configuraciones y relaciones entre números con más rapidez y facilidad que otros.</p>
+                <img src="IMAGENES/14.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="B20" id="B20V" value="1"> <label for="B20V">V</label>
+                    <input type="radio" name="B20" id="B20F" value="0"> <label for="B20F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>21. Me gusta construir modelos ( o hacer esculturas).</p>
+                <img src="IMAGENES/15.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="D21" id="D21V" value="1"> <label for="D21V">V</label>
+                    <input type="radio" name="D21" id="D21F" value="0"> <label for="D21F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>22. Tengo agudeza para encontrar el significado de las palabras.</p>
+                <img src="IMAGENES/16.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="A22" id="A22V" value="1"> <label for="A22V">V</label>
+                    <input type="radio" name="A22" id="A22F" value="0"> <label for="A22F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>23. Puedo mirar un objeto de una manera y con la misma facilidad verlo.</p>
+                <img src="IMAGENES/17.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="C23" id="C23V" value="1"> <label for="C23V">V</label>
+                    <input type="radio" name="C23" id="C23F" value="0"> <label for="C23F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>24. Con frecuencia hago la conexión entre una pieza de música y algún evento de mi vida.</p>
+                <img src="IMAGENES/18.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="E24" id="E24V" value="1"> <label for="E24V">V</label>
+                    <input type="radio" name="E24" id="E24F" value="0"> <label for="E24F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>25. Me gusta trabajar con números y figuras.</p>
+                <img src="IMAGENES/11.png" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="B25" id="B25V" value="1"> <label for="B25V">V</label>
+                    <input type="radio" name="B25" id="B25F" value="0"> <label for="B25F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>26. Me gusta sentarme silenciosamente y reflexionar sobre mis sentimientos íntimos.</p>
+                <img src="IMAGENES/20.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="F26" id="F26V" value="1"> <label for="F26V">V</label>
+                    <input type="radio" name="F26" id="F26F" value="0"> <label for="F26F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>27. Con sólo mirar la forma de construcciones y estructuras me siento a gusto.</p>
+                <img src="IMAGENES/21.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="C27" id="C27V" value="1"> <label for="C27V">V</label>
+                    <input type="radio" name="C27" id="C27F" value="0"> <label for="C27F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>28. Me gusta tararear, silbar y cantar en la ducha o cuando estoy sola.</p>
+                <img src="IMAGENES/22.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="E28" id="E28V" value="1"> <label for="E28V">V</label>
+                    <input type="radio" name="E28" id="E28F" value="0"> <label for="E28F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>29. Soy bueno(a) para el atletismo.</p>
+                <img src="IMAGENES/23.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="D29" id="D29V" value="1"> <label for="D29V">V</label>
+                    <input type="radio" name="D29" id="D29F" value="0"> <label for="D29F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>30. Me gusta escribir cartas detalladas a mis amigos.</p>
+                <img src="IMAGENES/24.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="A30" id="A30V" value="1"> <label for="A30V">V</label>
+                    <input type="radio" name="A30" id="A30F" value="0"> <label for="A30F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>31. Generalmente me doy cuenta de la expresión que tengo en la cara .</p>
+                <img src="IMAGENES/25.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="F31" id="F31V" value="1"> <label for="F31V">V</label>
+                    <input type="radio" name="F31" id="F31F" value="0"> <label for="F31F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>32. Me doy cuenta de las expresiones en la cara de otras personas.</p>
+                <img src="IMAGENES/26.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="G32" id="G32V" value="1"> <label for="G32V">V</label>
+                    <input type="radio" name="G32" id="G32F" value="0"> <label for="G32F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>33. Me mantengo "en contacto" con mis estados de ánimo. No me cuesta identificarlos.</p>
+                <img src="IMAGENES/27.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="F33" id="F33V" value="1"> <label for="F33V">V</label>
+                    <input type="radio" name="F33" id="F33F" value="0"> <label for="F33F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>34. Me doy cuenta de los estados de ánimo de otros.</p>
+                <img src="IMAGENES/28.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="G34" id="G34V" value="1"> <label for="G34V">V</label>
+                    <input type="radio" name="G34" id="G34F" value="0"> <label for="G34F">F</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <p>35. Me doy cuenta bastante bien de lo que otros piensan de mí.</p>
+                <img src="IMAGENES/29.jpg" width="250px" height="250px" >
+                <div class="button-container">
+                    <input type="radio" name="G35" id="G35V" value="1"> <label for="G35V">V</label>
+                    <input type="radio" name="G35" id="G35F" value="0"> <label for="G35F">F</label>
+                    
+                </div>
+                <button type="button" onclick="calcularResultados()">Calcular Resultados</button>
+            </div>
+            <!-- Continúa para todas las preguntas según su respectiva categoría -->
+
+            <!-- Añade más preguntas aquí siguiendo el mismo patrón -->
+            <!-- Botones de navegación -->
+            
+            <div id="botonesNavegacion" class="button-container">
+            
+            <button type="button" onclick="anterior()">Anterior</button>
+            <button type="button" onclick="siguiente()">Siguiente</button>
+            </div>
+
+            <div id="resultado" class="question" style="display: none;">
+                <!-- Aquí se mostrarán los resultados -->
+                <button type="button" onclick="volverAEvaluar()">Volver a hacer el test</button>
+            </div>
+        </form>
+        
+    <div id="resultado" class="question" style="display: none;">
+
+      </section>
+
+      <script>
+      let preguntaActual = 0;
+
+     function mostrarPregunta(index) {
+        const preguntas = document.querySelectorAll('.question');
+        preguntas.forEach((pregunta, i) => {
+            pregunta.style.display = i === index ? 'block' : 'none';
+        });
+     }
+     function saltarConEnter(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Evita que el formulario se envíe al presionar Enter
+        siguiente(); // Llama a la función para ir a la siguiente pregunta
+    }
+}
+
+    function anterior() {
+        if (preguntaActual > 0) {
+            preguntaActual--;
+            mostrarPregunta(preguntaActual);
+        }
+    }
+
+    function siguiente() {
+        const preguntas = document.querySelectorAll('.question');
+        if (preguntaActual < preguntas.length - 1) {
+            preguntaActual++;
+            mostrarPregunta(preguntaActual);
+        }
+    }
+    
+
+    function calcularResultados() {
+        const preguntas = document.querySelectorAll('.question');
+        if (preguntaActual < preguntas.length - 1) {
+            preguntaActual++;
+            mostrarPregunta(preguntaActual);
+        }
+
+    const categorias = {
+        A: ["A9", "A10", "A17", "A22", "A30"],
+        B: ["B5", "B7", "B15", "B20", "B25"],
+        C: ["C1", "C11", "C14", "C23", "C27"],
+        D: ["D8", "D16", "D19", "D21", "D29"],
+        E: ["E3", "E4", "E13", "E24", "E28"],
+        F: ["F2", "F6", "F26", "F31", "F33"],
+        G: ["G12", "G18", "G32", "G34", "G35"],
+    };
+
+    let puntajes = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0 };
+
+    // Sumar los valores según la categoría
+    Object.keys(categorias).forEach(categoria => {
+        categorias[categoria].forEach(pregunta => {
+            const respuesta = document.querySelector(`input[name="${pregunta}"]:checked`);
+            if (respuesta) {
+                puntajes[categoria] += parseInt(respuesta.value);
+            }
+        });
+    });
+
+    const nombreApellido = document.getElementById("nombreApellidoInput").value;
+
+    let resultadoTexto = `<h2>Resultados para ${nombreApellido}:</h2>`;
+    let categoriasSobresalientes = [];
+
+    Object.keys(puntajes).forEach(categoria => {
+        resultadoTexto += `<p>${getTipoInteligenciaTexto(categoria)}: ${puntajes[categoria]}</p>`;
+        if (puntajes[categoria] == 5) {
+            categoriasSobresalientes.push(getTipoInteligenciaTexto(categoria));
+        }
+    });
+
+    resultadoTexto += '<h2>Inteligencias sobresalientes:</h2>';
+
+    if (categoriasSobresalientes.length > 0) {
+        resultadoTexto += `<p>${nombreApellido}, tienes habilidades sobresalientes en: ${categoriasSobresalientes.join(", ")}.</p>`;
+    } else {
+        resultadoTexto += `<p>${nombreApellido}, no se encontró un tipo de inteligencia sobresaliente.</p>`;
+    }
+
+    document.getElementById("resultado").innerHTML = resultadoTexto;
+}
+
+    
+
+    function getTipoInteligenciaTexto(categoria) {
+        switch (categoria) {
+            case 'A':
+                return 'Inteligencia Verbal';
+            case 'B':
+                return 'Inteligencia Lógico-matemática';
+            case 'C':
+                return 'Inteligencia Visual-espacial';
+            case 'D':
+                return 'Inteligencia Kinestésica-corporal';
+            case 'E':
+                return 'Inteligencia Musical-rítmica';
+            case 'F':
+                return 'Inteligencia Intrapersonal';
+            case 'G':
+                return 'Inteligencia Interpersonal';
+            default:
+                return 'Desconocido';
+        }
+    }
+
+    // Muestra la primera pregunta al cargar la página
+    mostrarPregunta(preguntaActual);
+
+    </script>
+    
+    <h1 style="text-align: center; color: #030303;" class="texto-en-cuadro">DEFINICIONES DE INTELIGENCIA</h1>
+
+     <div class="containercuadro">
+        <div class="card">
+            <div class="front brilliant-border">
+               
+                <img src="IMAGENES/VERVAL.jpg" width="150px" height="170px">
+                <h2>INTELIGENCIA VERBAL</h2>
+            </div>
+            <div class="back brilliant-border">
+                <p> Tienes la capacidad de comprender y utilizar eficazmente el lenguaje oral y escrito.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front brilliant-border">
+                <img src="IMAGENES/LOGICA-MATE.jpg" width="150px" height="170px">
+                <h2>INTELIGENCIA LOGICA MATEMATICA</h2>
+            </div>
+            <div class="back brilliant-border">
+                <p>Tienes la capacidad de razonamiento, solución de problemas y comprensión de conceptos matemáticos y lógicos.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front brilliant-border">
+                <img src="IMAGENES/visual.jpg" width="150px" height="170px">
+                <h2>INTELIGENCIA VISUAL ESPACIAL</h2>
+            </div>
+            <div class="back brilliant-border">
+                <p>Tienes la capacidad de percibir, analizar y manipular objetos en el espacio de 
+                    forma precisa y eficiente, así como de visualizar y recordar imágenes y patrones 
+                    de forma detallada. Es una habilidad relacionada con la orientación espacial, 
+                    la percepción visual y la resolución de problemas visuales.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front brilliant-border">
+                <img src="IMAGENES/kinestecia.jpg" width="150px" height="170px">
+                <h2>INTELIGENCIA KINESTÉSICA CORPORAL</h2>
+            </div>
+            <div class="back brilliant-border">
+                <p>Tienes la capacidad de utilizar el cuerpo de manera hábil y coordinada 
+                    para realizar actividades físicas y deportivas. También se refiere a la
+                    sensibilidad y conciencia corporal para controlar el movimiento y la postura.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front brilliant-border">
+                <img src="IMAGENES/musica.jpg" width="170px" height="170px">
+                <h2>INTELIGENCIA MUSICAL RÍTMICA</h2>
+            </div>
+            <div class="back brilliant-border">
+                <p>Tienes la habilidad de percibir, interpretar y crear patrones rítmicos y 
+                    musicales de manera efectiva y fluida. Tambien la capacidad de sentir y 
+                    expresar ritmos, melodías y estructuras musicales 
+                    con facilidad.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front brilliant-border">
+                <img src="IMAGENES/intra.jpg" width="130px" height="170px">
+                <h2>INTELIGENCIA INTRAPERSONAL</h2>
+            </div>
+            <div class="back brilliant-border">
+                <p>Tienes la  capacidad de una persona para entender y controlar sus propias 
+                    emociones, pensamientos y comportamientos. Es la capacidad de autoconocimiento 
+                    y autocontrol.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front brilliant-border">
+                <img src="IMAGENES/interpersonal.jpg" width="130px" height="170px">
+                <h2>INTELIGENCIA INTERPERSONAL</h2>
+            </div>
+            <div class="back brilliant-border">
+                <p>Tienes la capacidad de entender y relacionarte efectivamente con 
+                    otras personas, tener empatía, ser socialmente hábil y saber comunicarse 
+                    de manera efectiva en diferentes situaciones sociales.</p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
